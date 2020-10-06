@@ -6,9 +6,20 @@
 //
 
 import UIKit
+import SnapKit
 
 class MainTabBarController: UITabBarController {
     // MARK: - Properties
+    
+    let actionButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "new_tweet"), for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = UIColor.mainBlue
+        button.layer.cornerRadius = 50 / 2
+        button.addTarget(self, action: #selector(handleActionButtonClick), for: .touchUpInside)
+        return button
+    }()
     
     
     
@@ -16,12 +27,28 @@ class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .white
+        setupView()
         setupViewControllers()
     }
     
+    
+    // MARK: - Selectors
+    
+    @objc fileprivate func handleActionButtonClick() {
+        print("handleActionButtonClick")
+    }
+    
     // MARK: - Helpers
+    
+    fileprivate func setupView() {
+        view.backgroundColor = .white
+        view.addSubview(actionButton)
+        actionButton.snp.makeConstraints { (make) in
+            make.width.height.equalTo(50)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-64)
+        }
+    }
     
     fileprivate func setupViewControllers() {
         
