@@ -14,6 +14,8 @@
 		44CD6F6B2527C1410093252E /* NotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD6F6A2527C1410093252E /* NotificationsController.swift */; };
 		44CD6F6E2527C1520093252E /* ConversationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD6F6D2527C1520093252E /* ConversationsController.swift */; };
 		44CD6F742528D3C70093252E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD6F732528D3C70093252E /* Extensions.swift */; };
+		44CD6F79252C51D50093252E /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD6F78252C51D50093252E /* LoginController.swift */; };
+		44CD6F7C252C51E30093252E /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD6F7B252C51E30093252E /* RegistrationController.swift */; };
 		44F2C85B2521FBE50000B101 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F2C85A2521FBE50000B101 /* AppDelegate.swift */; };
 		44F2C85D2521FBE50000B101 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F2C85C2521FBE50000B101 /* SceneDelegate.swift */; };
 		44F2C8622521FBE50000B101 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44F2C8602521FBE50000B101 /* Main.storyboard */; };
@@ -28,6 +30,8 @@
 		44CD6F6A2527C1410093252E /* NotificationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsController.swift; sourceTree = "<group>"; };
 		44CD6F6D2527C1520093252E /* ConversationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsController.swift; sourceTree = "<group>"; };
 		44CD6F732528D3C70093252E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		44CD6F78252C51D50093252E /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		44CD6F7B252C51E30093252E /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		44F2C8572521FBE50000B101 /* Twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44F2C85A2521FBE50000B101 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44F2C85C2521FBE50000B101 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +67,7 @@
 		44CD6F5C2527BC3F0093252E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				44CD6F76252C51BB0093252E /* Authentification */,
 				44CD6F612527BD0A0093252E /* MainTabBarController.swift */,
 				44CD6F642527C06B0093252E /* FeedController.swift */,
 				44CD6F672527C1290093252E /* ExploreController.swift */,
@@ -85,6 +90,15 @@
 				44CD6F732528D3C70093252E /* Extensions.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		44CD6F76252C51BB0093252E /* Authentification */ = {
+			isa = PBXGroup;
+			children = (
+				44CD6F78252C51D50093252E /* LoginController.swift */,
+				44CD6F7B252C51E30093252E /* RegistrationController.swift */,
+			);
+			path = Authentification;
 			sourceTree = "<group>";
 		};
 		44F2C84E2521FBE50000B101 = {
@@ -272,9 +286,11 @@
 				44CD6F6E2527C1520093252E /* ConversationsController.swift in Sources */,
 				44F2C85B2521FBE50000B101 /* AppDelegate.swift in Sources */,
 				44CD6F742528D3C70093252E /* Extensions.swift in Sources */,
+				44CD6F79252C51D50093252E /* LoginController.swift in Sources */,
 				44CD6F682527C1290093252E /* ExploreController.swift in Sources */,
 				44F2C85D2521FBE50000B101 /* SceneDelegate.swift in Sources */,
 				44CD6F622527BD0A0093252E /* MainTabBarController.swift in Sources */,
+				44CD6F7C252C51E30093252E /* RegistrationController.swift in Sources */,
 				44CD6F652527C06B0093252E /* FeedController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
