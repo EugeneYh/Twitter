@@ -13,61 +13,68 @@ class LoginController: UIViewController {
     let logoImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = #imageLiteral(resourceName: "TwitterLogo")
+        iv.contentMode = .scaleAspectFit
         iv.layer.cornerRadius = 5
         iv.clipsToBounds = true
         return iv
         
     }()
     
-    let emalView: UIView = {
-        let view = UIView()
+    let emailTextField: UITextField = {
+        let tf = UITextField()
         
-        let iconView: UIImageView = {
-            let iv = UIImageView()
-            iv.image = UIImage(named: "mail")
-            iv.tintColor = .white
-            return iv
-        }()
-        
-        let inputTextField: UITextField = {
-            let tf = UITextField()
-            tf.placeholder = "Email"
-            tf.font = UIFont.systemFont(ofSize: 16)
-            let attributedText = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-            tf.attributedPlaceholder = attributedText
-            tf.textColor = .white
-            //tf.textColor = .white
-            return tf
-        }()
-        
-        view.addSubview(iconView)
-        view.addSubview(inputTextField)
-        
-        iconView.snp.makeConstraints { (make) in
-            make.width.height.equalTo(26)
-        }
-        iconView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
-        inputTextField.snp.makeConstraints { (make) in
-            make.leading.equalTo(iconView.snp.trailing).offset(8)
-            make.bottom.equalToSuperview()
-        }
-        
+        return tf
+    }()
+    
+    let passwordTextField: UITextField = {
+        let tf = UITextField()
+        tf.isSecureTextEntry = true
+        return tf
+    }()
+    
+    lazy var emailView: UIView = {
+        let image = #imageLiteral(resourceName: "ic_mail_outline_white_2x-1")
+        let view = Helpers.shared.createContainerView(withImage: image, textField: emailTextField, placeholderString: "Email")
         return view
     }()
     
-    let passwordView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .red
+    lazy var passwordView: UIView = {
+        let image = #imageLiteral(resourceName: "ic_lock_outline_white_2x")
+        let view = Helpers.shared.createContainerView(withImage: image, textField: passwordTextField, placeholderString: "Password")
         return view
     }()
+    
+    let loginButton: UIButton = {
+        let button = Helpers.shared.createLoginSignUpButton(withTitle: "Login")
+        button.addTarget(self, action: #selector(handleLoginButton), for: .touchUpInside)
+        return button
+    }()
+    
+    let attributedButton: UIButton = {
+        let button = Helpers.shared.createAttributedButton(withQuestion: "Don't have an account?", andActionName: " Sign up!")
+        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+        return button
+    }()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
+    
+    // MARK: - Selectors
+    
+    @objc fileprivate func handleLoginButton() {
+        print("Login button pressed")
+    }
+    
+    @objc fileprivate func handleSignUp() {
+        let signUpController = RegistrationController()
+        navigationController?.pushViewController(signUpController, animated: true)
+    }
+    
+    // MARK: - Lifecycle
     
     
     fileprivate func setupView() {
@@ -77,12 +84,15 @@ class LoginController: UIViewController {
         navigationController?.navigationBar.barStyle = .black
         
         // setup view elements
-        let stackView = UIStackView(arrangedSubviews: [emalView, passwordView])
+        let stackView = UIStackView(arrangedSubviews: [emailView, passwordView, loginButton])
         stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.spacing = 20
+        stackView.distribution = .fillEqually
         
         view.addSubview(logoImageView)
         view.addSubview(stackView)
+        view.addSubview(attributedButton)
+        
         
         logoImageView.snp.makeConstraints { (make) in
             make.width.height.equalTo(100)
@@ -90,7 +100,7 @@ class LoginController: UIViewController {
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(36)
         }
         
-        emalView.snp.makeConstraints { (make) in
+        emailView.snp.makeConstraints { (make) in
             make.height.equalTo(50)
         }
         
@@ -99,9 +109,14 @@ class LoginController: UIViewController {
         }
         
         stackView.snp.makeConstraints { (make) in
-            make.top.equalTo(logoImageView.snp.bottom).offset(36)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
+            make.top.equalTo(logoImageView.snp.bottom).offset(32)
+            make.leading.equalToSuperview().offset(32)
+            make.trailing.equalToSuperview().offset(-32)
+        }
+        
+        attributedButton.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
         }
         
     }

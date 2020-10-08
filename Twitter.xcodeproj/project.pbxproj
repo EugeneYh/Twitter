@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		340A15E7252DB29700F1A294 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340A15E6252DB29700F1A294 /* Helpers.swift */; };
 		3F6A1F959E8331F0AD71C08E /* Pods_Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6D4B147FBE817295CEEAAD /* Pods_Twitter.framework */; };
 		44CD6F622527BD0A0093252E /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD6F612527BD0A0093252E /* MainTabBarController.swift */; };
 		44CD6F652527C06B0093252E /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD6F642527C06B0093252E /* FeedController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		340A15E6252DB29700F1A294 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		44CD6F612527BD0A0093252E /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		44CD6F642527C06B0093252E /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
 		44CD6F672527C1290093252E /* ExploreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreController.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				44CD6F732528D3C70093252E /* Extensions.swift */,
+				340A15E6252DB29700F1A294 /* Helpers.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				44CD6F6E2527C1520093252E /* ConversationsController.swift in Sources */,
 				44F2C85B2521FBE50000B101 /* AppDelegate.swift in Sources */,
 				44CD6F742528D3C70093252E /* Extensions.swift in Sources */,
+				340A15E7252DB29700F1A294 /* Helpers.swift in Sources */,
 				44CD6F79252C51D50093252E /* LoginController.swift in Sources */,
 				44CD6F682527C1290093252E /* ExploreController.swift in Sources */,
 				44F2C85D2521FBE50000B101 /* SceneDelegate.swift in Sources */,
