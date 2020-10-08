@@ -22,7 +22,6 @@ class LoginController: UIViewController {
     
     let emailTextField: UITextField = {
         let tf = UITextField()
-        
         return tf
     }()
     
