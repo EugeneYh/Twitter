@@ -84,7 +84,7 @@ class RegistrationController: UIViewController {
                 print(error.localizedDescription)
                 return
             }
-            print("Agon'")
+            print("New user successfully registered and signed up")
         }
         
     }
