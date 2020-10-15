@@ -7,17 +7,22 @@
 
 import UIKit
 import SnapKit
+import Firebase
 
 class RegistrationController: UIViewController {
     
     //MARK: - Properties
+    private let imagePickerController = UIImagePickerController()
+    private var userImage: UIImage?
     
     let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "plus_photo"), for: .normal)
         button.tintColor = .white
+        button.addTarget(self, action: #selector(handlePlusButtonPressed), for: .touchUpInside)
         return button
     }()
+    
     
     let emailTextField = UITextField()
     
@@ -39,7 +44,12 @@ class RegistrationController: UIViewController {
     
     lazy var usernameContainerView = Helpers.shared.createContainerView(withImage: #imageLiteral(resourceName: "ic_person_outline_white_2x"), textField: usernameTextField, placeholderString: "Username")
        
-    let signUpButton = Helpers.shared.createLoginSignUpButton(withTitle: "Sign Up")
+    let registrationButton: UIButton = {
+        let button = Helpers.shared.createLoginSignUpButton(withTitle: "Sign Up")
+        button.addTarget(self, action: #selector(handleRegisatration), for: .touchUpInside)
+        return button
+    }()
+    
     
     let attributedLoginButton: UIButton = {
         let button = Helpers.shared.createAttributedButton(withQuestion: "Already have an account?", andActionName: " Log in")
@@ -47,7 +57,6 @@ class RegistrationController: UIViewController {
         return button
     }()
         
-    
         
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -56,6 +65,30 @@ class RegistrationController: UIViewController {
     }
     
     //MARK: - Selectors
+    
+    @objc fileprivate func handlePlusButtonPressed() {
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    @objc fileprivate func handleRegisatration() {
+        guard let email = emailTextField.text else { return }
+        guard let pasword = passwordTextField.text else { return }
+        guard let fullName = fullNameTextField.text else { return }
+        guard let userName = usernameTextField.text else { return }
+        //guard let profileImage = userImage else { return }
+        
+        let credentials = AuthCredentials(email: email, password: pasword, fullName: fullName, userName: userName, profileImage: userImage)
+        
+        AuthService.shared.registerUser(credentials: credentials) { (error, ref) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            print("Agon'")
+        }
+        
+    }
+    
     @objc fileprivate func handleLoginButtonPressed() {
         navigationController?.popViewController(animated: true)
     }
@@ -63,8 +96,11 @@ class RegistrationController: UIViewController {
     //MARK: - Heplers
     
     fileprivate func setupView() {
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        
         view.backgroundColor = .mainBlue
-        let stackView = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView, fullNameContainerView, usernameContainerView, signUpButton])
+        let stackView = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView, fullNameContainerView, usernameContainerView, registrationButton])
         stackView.axis = .vertical
         stackView.spacing = 20
         stackView.distribution = .fillEqually
@@ -93,5 +129,23 @@ class RegistrationController: UIViewController {
         }
         
         
+    }
+}
+
+extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let editedImage = info[.editedImage] as? UIImage else {return}
+        userImage = editedImage
+        
+        plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width / 2
+        plusPhotoButton.clipsToBounds = true
+        plusPhotoButton.imageView?.contentMode = .scaleAspectFit
+        plusPhotoButton.layer.borderWidth = 2
+        plusPhotoButton.layer.borderColor = UIColor.white.cgColor
+        
+        plusPhotoButton.setImage(editedImage.withRenderingMode(.alwaysOriginal), for: .normal)
+
+        
+        dismiss(animated: true, completion: nil)
     }
 }

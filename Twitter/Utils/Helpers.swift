@@ -19,7 +19,7 @@ class Helpers {
 
         let inputTextField = textField
         inputTextField.placeholder = placeholderString
-        inputTextField.font = UIFont.systemFont(ofSize: 16)
+        inputTextField.font = UIFont.systemFont(ofSize: 18)
         let attributedText = NSAttributedString(string: placeholderString, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         inputTextField.attributedPlaceholder = attributedText
         inputTextField.textColor = .white
@@ -68,7 +68,7 @@ class Helpers {
         let button = UIButton(type: .system)
         let attributedTitle = NSMutableAttributedString(string: question, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor : UIColor.white])
         
-        attributedTitle.append(NSAttributedString(string: actionName, attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor : UIColor.white]))
+        attributedTitle.append(NSAttributedString(string: actionName, attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor : UIColor.white]))
         
         button.setAttributedTitle(attributedTitle, for: .normal)
         
