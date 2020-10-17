@@ -13,6 +13,14 @@ class MainTabBarController: UITabBarController {
     
     // MARK: - Properties
     
+    var user: User? {
+        didSet {
+            guard let navigationController = viewControllers?.first as? UINavigationController else { return }
+            guard let feedController = navigationController.viewControllers.first as? FeedController else { return }
+            feedController.user = self.user
+        }
+    }
+    
     let actionButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "new_tweet"), for: .normal)
@@ -37,20 +45,25 @@ class MainTabBarController: UITabBarController {
     
     // MARK: - API
     
+    func fetchUser() {
+        UserService.shared.fetchUser { (user) in
+            self.user = user
+        }
+    }
+    
     func authenticateUserAndConfigureUI() {
-        
         if Auth.auth().currentUser == nil {
-            print("User is NOT signed in")
+            print("DEBUG: User is NOT signed in")
             DispatchQueue.main.async {
                 let navController = UINavigationController(rootViewController: LoginController())
                 navController.modalPresentationStyle = .fullScreen
                 self.present(navController, animated: true, completion: nil)
             }
-            
         } else {
-            print("User is signed in")
+            print("DEBUG: User is signed in")
             setupView()
             setupViewControllers()
+            fetchUser()
         }
     }
     
@@ -58,7 +71,7 @@ class MainTabBarController: UITabBarController {
         do {
             try Auth.auth().signOut()
         } catch let error {
-            print("Filed to sign out", error.localizedDescription)
+            print("DEBUG: Filed to sign out", error.localizedDescription)
         }
         
     }
@@ -67,7 +80,10 @@ class MainTabBarController: UITabBarController {
     // MARK: - Selectors
     
     @objc fileprivate func handleActionButtonClick() {
-        print("handleActionButtonClick")
+        guard let user = user else { return }
+        let uploadTweetNavController = UINavigationController(rootViewController: UploadTweetController(user: user))
+        uploadTweetNavController.modalPresentationStyle = .fullScreen
+        present(uploadTweetNavController, animated: true, completion: nil)
     }
     
     

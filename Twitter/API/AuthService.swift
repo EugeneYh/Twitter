@@ -20,6 +20,10 @@ struct AuthCredentials {
 struct AuthService {
     static let shared = AuthService()
     
+    func logUserIn(email: String, password: String, complition: AuthDataResultCallback?) {
+        Auth.auth().signIn(withEmail: email, password: password, completion: complition)
+    }
+    
     func registerUser(credentials: AuthCredentials, completion: @escaping(Error?, DatabaseReference) -> Void) {
         let email = credentials.email
         let password = credentials.password
@@ -54,7 +58,7 @@ struct AuthService {
                                     "fullName": fullName, "userName": userName,
                                     "profileImageURL": profileImageUrl]
                     
-                    USERS_REF.child(userId).updateChildValues(userInfo, withCompletionBlock: completion)
+                    REF_USERS.child(userId).updateChildValues(userInfo, withCompletionBlock: completion)
                 }
             }
         }

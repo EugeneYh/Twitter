@@ -45,7 +45,7 @@ class LoginController: UIViewController {
     
     let loginButton: UIButton = {
         let button = Helpers.shared.createLoginSignUpButton(withTitle: "Login")
-        button.addTarget(self, action: #selector(handleLoginButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return button
     }()
     
@@ -55,17 +55,35 @@ class LoginController: UIViewController {
         return button
     }()
     
-    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
+
     
     // MARK: - Selectors
     
-    @objc fileprivate func handleLoginButton() {
+    @objc fileprivate func handleLogin() {
         print("Login button pressed")
+        
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        
+        AuthService.shared.logUserIn(email: email, password: password) { (resutl, error) in
+            if let error = error {
+                print("Failed to log in a user", error.localizedDescription)
+                return
+            }
+            print("User was successfully signed in")
+            
+            guard let window = UIApplication.shared.windows.first(where: {$0.isKeyWindow}) else { return }
+            guard let tabBarController = window.rootViewController as? MainTabBarController else { return }
+            tabBarController.authenticateUserAndConfigureUI()
+            
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @objc fileprivate func handleSignUp() {
@@ -73,8 +91,7 @@ class LoginController: UIViewController {
         navigationController?.pushViewController(signUpController, animated: true)
     }
     
-    // MARK: - Lifecycle
-    
+    // MARK: - Helpers
     
     fileprivate func setupView() {
         // styling
