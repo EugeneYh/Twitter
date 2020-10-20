@@ -46,7 +46,8 @@ class MainTabBarController: UITabBarController {
     // MARK: - API
     
     func fetchUser() {
-        UserService.shared.fetchUser { (user) in
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        UserService.shared.fetchUser(uid: uid) { (user) in
             self.user = user
         }
     }
@@ -102,7 +103,7 @@ class MainTabBarController: UITabBarController {
     
     fileprivate func setupViewControllers() {
         
-        let feedVC = createNavigationController(rootViewController: FeedController(), imageName: "home_unselected", title: nil)
+        let feedVC = createNavigationController(rootViewController: FeedController(collectionViewLayout: UICollectionViewFlowLayout()), imageName: "home_unselected", title: nil)
         let exploreVC = createNavigationController(rootViewController: ExploreController(), imageName: "search_unselected", title: "Explore")
         let notificationsVC = createNavigationController(rootViewController: NotificationsController(), imageName: "like_unselected", title: "Notifications")
         let conversationsVC = createNavigationController(rootViewController: ConversationsController(), imageName: "ic_mail_outline_white_2x-1", title: "Messages")

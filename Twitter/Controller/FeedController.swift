@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import SDWebImage
 
-class FeedController: UIViewController {
+class FeedController: UICollectionViewController {
     
     // Mark: - Properties
     
@@ -21,6 +21,8 @@ class FeedController: UIViewController {
             }
         }
     }
+    
+    private var tweets = [Tweet]()
     
     let profileImageView: UIImageView = {
         let iv = UIImageView()
@@ -42,14 +44,16 @@ class FeedController: UIViewController {
     
     private func fetchTweets() {
         TweetService.shared.fetchTweets { (tweets) in
-            print("DEGUB: tweets are \(tweets)")
+            self.tweets = tweets
+            self.collectionView.reloadData()
         }
     }
     
     // MARK: - Helpers
     
     fileprivate func setupView() {
-        view.backgroundColor = .white
+        collectionView.backgroundColor = .white
+        collectionView.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.cellID)
     
         let imageView = UIImageView(image: UIImage(named: "twitter_logo_blue"))
         imageView.contentMode = .scaleAspectFit
@@ -64,4 +68,22 @@ class FeedController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileImageView)
     }
     
+}
+
+extension FeedController {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return tweets.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedCell.cellID, for: indexPath) as! FeedCell
+        cell.tweet = tweets[indexPath.item]
+        return cell
+    }
+}
+
+extension FeedController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return .init(width: view.frame.width, height: 120)
+    }
 }
