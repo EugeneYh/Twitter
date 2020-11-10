@@ -26,6 +26,7 @@ class FeedController: UICollectionViewController {
     
     let profileImageView: UIImageView = {
         let iv = UIImageView()
+        iv.contentMode = .scaleAspectFit
         iv.layer.cornerRadius = 32 / 2
         iv.layer.masksToBounds = true
         return iv
@@ -48,6 +49,10 @@ class FeedController: UICollectionViewController {
             self.collectionView.reloadData()
         }
     }
+    
+    // MARK: - Selectors
+    
+    
     
     // MARK: - Helpers
     
@@ -77,6 +82,7 @@ extension FeedController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedCell.cellID, for: indexPath) as! FeedCell
+        cell.delegate = self
         cell.tweet = tweets[indexPath.item]
         return cell
     }
@@ -86,4 +92,13 @@ extension FeedController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: view.frame.width, height: 120)
     }
+}
+
+extension FeedController: FeedCellDelegate {
+    func handleProfileImageTapped(_ cell: FeedCell) {
+        let profileVC = ProfileViewController(collectionViewLayout: UICollectionViewFlowLayout() )
+        navigationController?.pushViewController(profileVC, animated: true)
+    }
+    
+    
 }

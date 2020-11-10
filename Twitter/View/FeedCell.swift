@@ -8,6 +8,10 @@
 import UIKit
 import SnapKit
 
+protocol FeedCellDelegate: class {
+    func handleProfileImageTapped(_ cell: FeedCell)
+}
+
 class FeedCell: UICollectionViewCell {
     
     // MARK: - Properties
@@ -20,11 +24,16 @@ class FeedCell: UICollectionViewCell {
         }
     }
     
-    let profileImageView: UIImageView = {
+    weak var delegate: FeedCellDelegate?
+    
+    private lazy var profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.backgroundColor = .mainBlue
         iv.layer.cornerRadius = 64 / 2
         iv.layer.masksToBounds = true
+        
+        iv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleProfileImageTapped)))
+        iv.isUserInteractionEnabled = true
         return iv
     }()
     
@@ -97,6 +106,10 @@ class FeedCell: UICollectionViewCell {
     }
     
     // MARK: - Selectors
+    
+    @objc private func handleProfileImageTapped() {
+        delegate?.handleProfileImageTapped(self)
+    }
     
     @objc private func handleCommentTapped() {
         print("Comment tapped")
@@ -172,10 +185,11 @@ class FeedCell: UICollectionViewCell {
     
     fileprivate func configureTweet() {
         guard let tweet = tweet else {return}
+        let tweetViewModel = TweetViewModel(tweet: tweet)
         
+        self.userInfoLabel.attributedText = tweetViewModel.userInfoLabel
         self.captionLabel.text = tweet.caption
-        self.userInfoLabel.text = tweet.user.userName
-        self.profileImageView.sd_setImage(with: tweet.user.profileImageURL)
+        self.profileImageView.sd_setImage(with: tweetViewModel.profileImageURL)
     }
     
 }
