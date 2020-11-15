@@ -90,6 +90,7 @@ class ProfileViewHeader: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
+        filterView.delegate = self
         setupView()
     }
     
@@ -157,4 +158,19 @@ class ProfileViewHeader: UICollectionReusableView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+//MARK: - ProfileFilterViewDelegate
+
+extension ProfileViewHeader: ProfileFilterViewDelegate {
+    func filterViewAnimate(_ view: ProfileFilterView, didSelect indexPath: IndexPath) {
+        guard let cell = view.collectionView.cellForItem(at: indexPath) as? ProfileFilterViewCell else { return }
+        
+        let xPosition = cell.frame.origin.x
+        UIView.animate(withDuration: 0.3) {
+            self.bottomView.frame.origin.x = xPosition
+        }
+    }
+    
+    
 }

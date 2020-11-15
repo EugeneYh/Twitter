@@ -8,10 +8,15 @@
 import UIKit
 import SnapKit
 
+protocol ProfileFilterViewDelegate: class {
+    func  filterViewAnimate (_ view: ProfileFilterView, didSelect indexPath: IndexPath)
+}
+
 class ProfileFilterView: UIView {
     
     // MARK: - Properties
     
+    weak var delegate: ProfileFilterViewDelegate?
     private let cellLineSpacing: CGFloat = 2
     
     
@@ -52,6 +57,9 @@ extension ProfileFilterView: UICollectionViewDelegate, UICollectionViewDataSourc
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.filterViewAnimate(self, didSelect: indexPath)
+    }
     
 }
 
