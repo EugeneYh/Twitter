@@ -12,6 +12,8 @@ class ProfileViewHeader: UICollectionReusableView {
     
     static let headerId = String(describing: self)
     
+    private let filterView = ProfileFilterView()
+    
     private lazy var topHeaderView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.mainBlue
@@ -77,6 +79,11 @@ class ProfileViewHeader: UICollectionReusableView {
         return label
     }()
     
+    private let bottomView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .mainBlue
+        return view
+    }()
     
     //MARK: - Lifecycle
     
@@ -102,14 +109,13 @@ class ProfileViewHeader: UICollectionReusableView {
         let stackView = UIStackView(arrangedSubviews: [fullnameLabel, usernameLabel, bioLabel])
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
-        stackView.spacing = 4
+        stackView.spacing = 2
         
         addSubview(topHeaderView)
         addSubview(profileImageView)
         addSubview(editProfileImageButton)
         addSubview(stackView)
-        
-        
+        addSubview(filterView)
         
         topHeaderView.snp.makeConstraints { (make) in
             make.width.equalToSuperview()
@@ -133,6 +139,18 @@ class ProfileViewHeader: UICollectionReusableView {
             make.top.equalTo(profileImageView.snp.bottom).offset(8)
             make.leading.equalToSuperview().offset(12)
             make.trailing.equalToSuperview().offset(-12)
+        }
+        
+        filterView.snp.makeConstraints { (make) in
+            make.height.equalTo(50)
+            make.leading.bottom.trailing.equalToSuperview()
+        }
+        
+        addSubview(bottomView)
+        bottomView.snp.makeConstraints { (make) in
+            make.leading.bottom.equalToSuperview()
+            make.height.equalTo(2)
+            make.width.equalTo(self.frame.width / 3)
         }
     }
     

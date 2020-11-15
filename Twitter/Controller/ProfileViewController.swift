@@ -6,11 +6,11 @@
 //
 
 import UIKit
+import SnapKit
 
 class ProfileViewController: UICollectionViewController {
     
     // MARK: - Instance properties
-    
     
     
     // MARK: - Lifecycle
@@ -31,7 +31,6 @@ class ProfileViewController: UICollectionViewController {
     
     fileprivate func setupCollectionView() {
         collectionView.backgroundColor = .white
-        
         collectionView.register(ProfileViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ProfileViewHeader.headerId)
         collectionView.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.cellID)
     }
@@ -64,6 +63,6 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return .init(width: view.frame.width, height: 300)
+        return .init(width: view.frame.width, height: 350)
     }
 }

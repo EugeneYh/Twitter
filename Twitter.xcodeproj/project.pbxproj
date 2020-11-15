@@ -11,6 +11,8 @@
 		344CB97F2538429900C70662 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344CB97E2538429900C70662 /* AuthService.swift */; };
 		34713B4F254A0A4400EA7880 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34713B4E254A0A4400EA7880 /* ProfileViewController.swift */; };
 		34713B552553F30E00EA7880 /* ProfileViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34713B542553F30E00EA7880 /* ProfileViewHeader.swift */; };
+		34713B59255D200A00EA7880 /* ProfileFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34713B58255D200A00EA7880 /* ProfileFilterView.swift */; };
+		34713B5C255DE3DA00EA7880 /* ProfileFilterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34713B5B255DE3DA00EA7880 /* ProfileFilterViewCell.swift */; };
 		349380D52532000E00C263CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 349380D42532000E00C263CE /* GoogleService-Info.plist */; };
 		3493810225363A2700C263CE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3493810125363A2700C263CE /* Constants.swift */; };
 		34BF0F832538DF6500BAF77D /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BF0F822538DF6500BAF77D /* UserService.swift */; };
@@ -43,6 +45,8 @@
 		344CB97E2538429900C70662 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		34713B4E254A0A4400EA7880 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		34713B542553F30E00EA7880 /* ProfileViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewHeader.swift; sourceTree = "<group>"; };
+		34713B58255D200A00EA7880 /* ProfileFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilterView.swift; sourceTree = "<group>"; };
+		34713B5B255DE3DA00EA7880 /* ProfileFilterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilterViewCell.swift; sourceTree = "<group>"; };
 		349380D42532000E00C263CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Twitter/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		3493810125363A2700C263CE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		34BF0F822538DF6500BAF77D /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -189,6 +193,8 @@
 				34BF0F9B253A21AE00BAF77D /* CaptionTextView.swift */,
 				34BF0FA4253C69FA00BAF77D /* FeedCell.swift */,
 				34713B542553F30E00EA7880 /* ProfileViewHeader.swift */,
+				34713B58255D200A00EA7880 /* ProfileFilterView.swift */,
+				34713B5B255DE3DA00EA7880 /* ProfileFilterViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -345,8 +351,10 @@
 				34BF0FA8253F816900BAF77D /* TweetViewModel.swift in Sources */,
 				44CD6F7C252C51E30093252E /* RegistrationController.swift in Sources */,
 				44CD6F652527C06B0093252E /* FeedController.swift in Sources */,
+				34713B59255D200A00EA7880 /* ProfileFilterView.swift in Sources */,
 				3493810225363A2700C263CE /* Constants.swift in Sources */,
 				34BF0FA2253B81CD00BAF77D /* Tweet.swift in Sources */,
+				34713B5C255DE3DA00EA7880 /* ProfileFilterViewCell.swift in Sources */,
 				34BF0F9F253A30AB00BAF77D /* TweetService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
