@@ -11,6 +11,12 @@ import SnapKit
 class ProfileFilterViewCell: UICollectionViewCell {
     //MARK: - Properties
     
+    var option: ProfileFilterOptions? {
+        didSet{
+            titleLabel.text = option?.description ?? ""
+        }
+    }
+    
     static let cellId = String(describing: self)
     
     private let titleLabel: UILabel = {

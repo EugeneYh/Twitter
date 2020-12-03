@@ -41,6 +41,12 @@ class FeedController: UICollectionViewController {
         fetchTweets()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.barStyle = .default
+    }
+    
     // MARK: - API
     
     private func fetchTweets() {
@@ -72,7 +78,6 @@ class FeedController: UICollectionViewController {
         }
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileImageView)
     }
-    
 }
 
 extension FeedController {
@@ -96,7 +101,8 @@ extension FeedController: UICollectionViewDelegateFlowLayout {
 
 extension FeedController: FeedCellDelegate {
     func handleProfileImageTapped(_ cell: FeedCell) {
-        let profileVC = ProfileViewController(collectionViewLayout: UICollectionViewFlowLayout() )
+        guard let user = cell.tweet?.user else {return}
+        let profileVC = ProfileViewController(user: user)
         navigationController?.pushViewController(profileVC, animated: true)
     }
     
